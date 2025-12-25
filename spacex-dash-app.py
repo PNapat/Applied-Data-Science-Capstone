@@ -43,12 +43,18 @@ app.layout = html.Div(children=[html.H1('SpaceX Launch Records Dashboard',
                                 html.P("Payload range (Kg):"),
 
                                 # TASK 3: Add a slider to select payload range
-                                dcc.RangeSlider(id='payload-slider',
-                                    min=0, max=10000, step=1000,
-                                    marks={0: '0',
-                                        100: '100'},
-                                    value=[0, 10000]),
-
+                                dcc.RangeSlider(
+                                    id='payload-slider',
+                                    min=0,
+                                    max=10000,
+                                    step=1000,
+                                    marks={0: '0', 10000: '10000'},
+                                    value=[0, 10000],
+                                    tooltip={
+                                        "placement": "bottom",
+                                        "always_visible": True
+                                    }
+                                ),
                                 # TASK 4: Add a scatter chart to show the correlation between payload and launch success
                                 html.Div(dcc.Graph(id='success-payload-scatter-chart')),
                                 ])
@@ -117,4 +123,3 @@ def get_scatter_chart(entered_site, slider_val):
 # Run the app
 if __name__ == '__main__':
     app.run()
-
